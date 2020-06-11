@@ -38,7 +38,7 @@ router.beforeEach((to, from, next) => {
   console.log(to.name);
   if(to.name == "login") {
     next();
-  }else if (store.state.user.hasGetInfo) {
+  }else if (localStorage.getItem("token")) {
     turnTo(to, store.state.user.menuAuthor, next)
   } else { 
     next({name:"login"});

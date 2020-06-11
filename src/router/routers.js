@@ -48,17 +48,7 @@ export default [
       notCache: true,
     },
     component: Main,
-    children: [{
-      path: 'task-list',
-      name: 'task-list',
-      meta: {
-        icon: 'md-cog',
-        title: '任务列表',
-        notCache: true,
-      },
-      component: () =>
-        import('@/view/task/task-list.vue')
-    },
+    children: [
       {
         path: 'task-group',
         name: 'task-group',
@@ -70,6 +60,17 @@ export default [
         component: () =>
           import('@/view/group/task-group.vue')
       },
+      {
+      path: 'task-list',
+      name: 'task-list',
+      meta: {
+        icon: 'md-cog',
+        title: '任务列表',
+        notCache: true,
+      },
+      component: () =>
+        import('@/view/task/task-list.vue')
+    },
       {
         path: 'task-log',
         name: 'task-log',
