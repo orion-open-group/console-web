@@ -19,6 +19,7 @@
 import LoginForm from '_c/login-form'
 import { mapActions } from 'vuex'
 import {login} from "@/api/data"
+import routers from "@/router/routers";
 export default {
   components: {
     LoginForm
@@ -26,11 +27,13 @@ export default {
   methods: {
     ...mapActions([
       'handleLogin',
-      'getUserInfo'
     ]),
     handleSubmit ({ userName, password }) {
       login({ userName, password }).then(res => {
-        console.log(res);
+        if(res.data.code="200") {
+          localStorage.setItem("token",res.data.data.token);
+          this.$router.push({name:"schedule"});
+        }
       })
     }
   }

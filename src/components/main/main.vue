@@ -136,7 +136,6 @@
         "setHomeRoute",
         "closeTag"
       ]),
-      ...mapActions(["getUserInfo"]),
       turnToPage(route) {
         let {name, params, query} = {};
         if (typeof route === "string") name = route;
@@ -173,20 +172,6 @@
       handleClick(item) {
         this.turnToPage(item);
       },
-      getUser() {
-        this.getUserInfo().then(res => {
-          if (res.code === '200') {
-
-            // localSave("username", res.data.data.username);
-            // localSave("logoutUrl", res.data.data.logoutUrl);
-          } else {
-            console.log(res)
-          }
-        })
-          .catch(err => {
-            console.log(err)
-          });
-      }
     },
     watch: {
       $route(newRoute) {
@@ -214,7 +199,6 @@
       this.setBreadCrumb(this.$route);
       // 设置初始语言
       this.setLocal(this.$i18n.locale);
-      this.getUser();
       // 如果当前打开页面不在标签栏中，跳到homeName页
       if (!this.tagNavList.find(item => item.name === this.$route.name)) {
         this.$router.push({

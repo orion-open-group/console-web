@@ -12,9 +12,4 @@ export const login = ({ userName, password }) => {
   })
 }
 
-export const getUserInfo = (api) => {
-  return axios.request({
-    url: api,
-    method: 'get'
-  })
-}
+
