@@ -29,6 +29,8 @@ export const scheduleStateDecode = (code) =>{
       return "终止";
     case "FINISH":
       return "完成";
+    case "DELETED":
+      return "已取消";
   }
   return code;
 }
@@ -41,9 +43,17 @@ export const login = (param) => {
   })
 }
 
+export const scheduleImmediate= (param) => {
+  return axios.request({
+    url: '/schedule/immediate',
+    data: param,
+    method: 'post'
+  })
+}
+
 export const cleanRunningLock = (param) => {
   return axios.request({
-    url: '/task/schedule/cleanRunningLock',
+    url: '/schedule/cleanRunningLock',
     params: param,
     method: 'post'
   })
@@ -51,7 +61,7 @@ export const cleanRunningLock = (param) => {
 
 export const getTaskConfigList = (param) => {
   return axios.request({
-    url: '/task/config/list',
+    url: '/task/list',
     params: param,
     method: 'get'
   })
@@ -59,7 +69,7 @@ export const getTaskConfigList = (param) => {
 
 export const addTaskConfig = (param) => {
   return axios.request({
-    url: '/task/config/add',
+    url: '/task/add',
     data: param,
     method: 'post'
   })
@@ -67,7 +77,7 @@ export const addTaskConfig = (param) => {
 
 export const getTaskGroupList = (param) => {
   return axios.request({
-    url: '/task/group/list',
+    url: '/group/list',
     params: param,
     method: 'get'
   })
@@ -75,7 +85,7 @@ export const getTaskGroupList = (param) => {
 
 export const getTaskLogList = (param) => {
   return axios.request({
-    url: '/task/log/list',
+    url: '/command/list',
     params: param,
     method: 'get'
   })
@@ -83,7 +93,7 @@ export const getTaskLogList = (param) => {
 
 export const deleteTask = (param) => {
   return axios.request({
-    url: '/task/config/delete',
+    url: '/task/delete',
     data: param,
     method: 'post'
   })
@@ -91,7 +101,7 @@ export const deleteTask = (param) => {
 
 export const modifyTask = (param) => {
   return axios.request({
-    url: '/task/config/modify',
+    url: '/task/modify',
     data: param,
     method: 'post'
   })
@@ -99,7 +109,7 @@ export const modifyTask = (param) => {
 
 export const resumeSchedule = (param) => {
   return axios.request({
-    url: '/task/schedule/resume',
+    url: '/schedule/resume',
     data: param,
     method: 'post'
   })
@@ -107,7 +117,7 @@ export const resumeSchedule = (param) => {
 
 export const pauseSchedule = (param) => {
   return axios.request({
-    url: '/task/schedule/pause',
+    url: '/schedule/pause',
     data: param,
     method: 'post'
   })
@@ -115,7 +125,7 @@ export const pauseSchedule = (param) => {
 
 export const deleteGroup = (param) => {
   return axios.request({
-    url: '/task/group/delete',
+    url: '/group/delete',
     data: param,
     method: 'post'
   })
@@ -123,39 +133,24 @@ export const deleteGroup = (param) => {
 
 export const modifyGroup = (param) => {
   return axios.request({
-    url: '/task/group/modify',
+    url: '/group/modify',
     data: param,
     method: 'post'
-  })
-}
-
-export const queryGroupUser = (param) => {
-  return axios.request({
-    url: '/task/group/user/list',
-    params: param,
-    method: 'get'
   })
 }
 
 export const addGroup = (param) => {
   return axios.request({
-    url: 'task/group/add',
+    url: '/group/add',
     data: param,
     method: 'post'
   })
 }
 
-export const addGroupUser = (param) => {
-  return axios.request({
-    url: '/task/group/user/add',
-    data: param,
-    method: 'post'
-  })
-}
 
 export const taskCommandCopy = (param) => {
   return axios.request({
-    url: 'task/command/taskCopy',
+    url: '/command/taskCopy',
     data: param,
     method: 'post'
   })
@@ -163,7 +158,16 @@ export const taskCommandCopy = (param) => {
 
 export const taskCommandAbort = (param) => {
   return axios.request({
-    url: 'task/command/abort',
+    url: '/command/abort',
+    data: param,
+    method: 'post'
+  })
+}
+
+
+export const taskCommandDelete = (param) => {
+  return axios.request({
+    url: '/command/delete',
     data: param,
     method: 'post'
   })
@@ -171,7 +175,7 @@ export const taskCommandAbort = (param) => {
 
 export const taskCommandPause = (param) => {
   return axios.request({
-    url: 'task/command/pause',
+    url: '/command/pause',
     data: param,
     method: 'post'
   })
@@ -179,15 +183,7 @@ export const taskCommandPause = (param) => {
 
 export const taskCommandResume = (param) => {
   return axios.request({
-    url: 'task/command/resume',
-    data: param,
-    method: 'post'
-  })
-}
-
-export const deleteGroupUser = (param) => {
-  return axios.request({
-    url: '/task/group/user/delete',
+    url: '/command/resume',
     data: param,
     method: 'post'
   })

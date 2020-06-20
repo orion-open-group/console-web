@@ -92,8 +92,8 @@
         </FormItem>
         <FormItem label="是否并发执行" prop="parallel">
           <RadioGroup v-model="task.parallel">
-            <Radio :label="0">否</Radio>
-            <Radio :label="1">是</Radio>
+            <Radio :label="0" >否</Radio>
+            <Radio :label="1" >是</Radio>
           </RadioGroup>
         </FormItem>
       </Form>
@@ -120,7 +120,8 @@ import {
   modifyTask,
   pauseSchedule,
   resumeSchedule,
-  getTaskGroupList
+  getTaskGroupList,
+  scheduleImmediate,
 } from '@/api/data'
 
 export default {
@@ -129,7 +130,7 @@ export default {
     return {
       taskName: '',
       groupId: '',
-      task: {},
+      task: {parallel:1},
       taskStatus: '',
       showTaskModal: false,
       title: '添加任务',
@@ -153,7 +154,7 @@ export default {
           title: '分组',
           key: 'groupCode',
           align: 'center',
-          minWidth: 70
+          minWidth: 30
         },
         {
           title: '处理器',
@@ -163,12 +164,6 @@ export default {
           render: (h, p) => {
             return h('strong', p.row.processor.substr(p.row.processor.lastIndexOf('.') + 1))
           }
-        },
-        {
-          title: '类型',
-          key: 'scheduleType',
-          align: 'center',
-          width: 100
         },
         {
           title: '调度规则',
@@ -194,9 +189,36 @@ export default {
         {
           title: '操作',
           align: 'left',
-          width: 250,
+          width: 330,
           render: (h, params) => {
             return h('div', [
+              h(
+                'Button',
+                {
+                  props: {
+                    type: 'warning',
+                    size: 'small'
+                  },
+                  style: {
+                    marginLeft: '10px',
+                  },
+                  on: {
+                    click: () => {
+                      scheduleImmediate({
+                        taskId: params.row.id
+                      }).then(res => {
+                        if (res.data.code === '200') {
+                          this.$Message.success('调度成功')
+                          this.taskConfigList()
+                        } else {
+                          this.$Message.error('调度失败!' + res.data.msg)
+                        }
+                      })
+                    }
+                  }
+                },
+                '立刻执行'
+              ),
               h(
                 'Button',
                 {

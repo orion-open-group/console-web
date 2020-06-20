@@ -4,8 +4,8 @@
       <p slot="title">调度明细</p>
       <Row>
         <Form inline :label-width="100">
-          <FormItem label="任务ID">
-            <Input v-model="taskId" placeholder="请输入任务编号"/>
+          <FormItem label="任务名称">
+            <Input v-model="taskName" placeholder="请输入任务名称"/>
           </FormItem>
           <FormItem label="后台可用分组" style="width: 250px">
             <Select v-model="groupId" placeholder="请选择后台可用分组">
@@ -55,6 +55,7 @@
 import {
   getTaskLogList,
   taskCommandAbort,
+  taskCommandDelete,
   taskCommandCopy,
   // queryTaskProcess,
   getTaskGroupList,
@@ -74,7 +75,6 @@ export default {
       timerTaskList: [],
       groupList: [],
       groupId: "",
-      taskId: "",
       startTime: null,
       endTime: null,
       traceId: null,
@@ -215,6 +215,34 @@ export default {
                   },
                   style: {
                     marginLeft: "10px",
+                    display: param.row.commandType== 'SCHEDULE' && param.row.scheduleState=='INIT'?'inline-block':'none'
+                  },
+                  on: {
+                    click: () => {
+                      taskCommandDelete({
+                        commandId: param.row.commandId
+                      }).then(res => {
+                        if (res.data.code === "200") {
+                          this.$Message.success("删除调度成功");
+                          this.taskLogList()
+                        } else {
+                          this.$Message.error("删除调度失败!" + res.data.msg);
+                        }
+                      });
+                    }
+                  }
+                },
+                "删除"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "warning",
+                    size: "small"
+                  },
+                  style: {
+                    marginLeft: "10px",
                     display: param.row.commandType== 'SCHEDULE' && param.row.scheduleState=='RUN'?'inline-block':'none'
                   },
                   on: {
@@ -298,7 +326,7 @@ export default {
         pageNo: this.page.pageNo,
         pageSize: this.page.pageSize,
         groupId: this.groupId,
-        taskId: this.taskId,
+        taskName: this.taskName,
         startTime: this.startTime,
         endTime: this.endTime
       };

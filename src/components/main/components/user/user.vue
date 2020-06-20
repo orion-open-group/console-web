@@ -30,11 +30,8 @@
     },
     methods: {
       logout() {
-        let logoutUrl = localRead('logoutUrl')
-        window.location.href = logoutUrl + location.href
-        // setTimeout(1000, () => {
-        //   window.location.reload()
-        // })
+        localStorage.removeItem("token");
+        this.$router.push({name:"login"});
       },
       handleClick(name) {
         switch (name) {
