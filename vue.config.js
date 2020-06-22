@@ -18,8 +18,8 @@ const resolve = dir => {
 //   ? ''
 //   : '/'
 module.exports = {
-  publicPath: '/schedule/web',
-  outputDir: process.env.outputDir,
+  publicPath: '',
+  outputDir: "console-admin" ,
   // tweak internal webpack configuration.
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
   // 如果你不需要使用eslint，把lintOnSave设为false即可
