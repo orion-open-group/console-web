@@ -1,5 +1,5 @@
 ## 任务调度OSP操作台 
-主要提供页面交互操作，用于管理任务分组，任务实例，调度明细，调度指令操作等，需要和[schedule-console](https://github.com/orion-open-group/scheudle-console)配合使用
+主要提供页面交互操作，用于管理任务分组，任务实例，调度明细，调度指令操作等，需要和[schedule-console](https://github.com/orion-open-group/schedule-console)配合使用
 
 控制台是用vue单页面做的，对前端不是很擅长，如有更好的建议可直接联系我 vx:41332943
 
