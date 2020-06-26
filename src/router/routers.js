@@ -104,7 +104,7 @@ export default [
   },
   {
     path: '*',
-    redirect: '/401',
+    redirect: '/login',
     meta: {
       hideInMenu: true,
       notCache: true
