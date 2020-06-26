@@ -1,13 +1,12 @@
-## 任务调度OSP操作台 
-主要提供页面交互操作，用于管理任务分组，任务实例，调度明细，调度指令操作等，需要和[schedule-console](https://github.com/orion-open-group/schedule-console)配合使用
+## SCHEDULE TASK MANAGEMENT CONSOLE 
 
-控制台是用vue单页面做的，对前端不是很擅长，如有更好的建议可直接联系我 vx:41332943
+This project gives an impletation for task operation ,such as group management,task managment,task instance managment and so on ,it depends on the other project [schedule-console](https://github.com/orion-open-group/schedule-console),that project offers the rest service for all the operation
 
-## 如何使用
-代码下载后，可直接打开console_admin目录，打开index.html即可，默认登录用户 admin,123123
+this project is main tech is vue ,i am not good at this tech ,if you find any other bug or have good suggest ,pls tell me with potsmart@foxmail.com or wechat 4133294
 
-注意：控制台需要用chome浏览器打开，其他浏览器可能出现不兼容的问题
+## How to use it 
+Download the code to your local disk ,and you can enter the console_admin folder and open the index.html with chrome ,the other broswer isn't support very good now
 
 ## remark
-如果需要和后台调整url路径信息，请直接修改.env环境信息即可
+if you need to change the env pls change the .evn.xxx file
 
